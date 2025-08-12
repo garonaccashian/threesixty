@@ -27,7 +27,11 @@ class AppointmentController extends Controller
     }
 
     public function destroy(Appointment $appointment) {
+<<<<<<< HEAD
         $this->authorize('delete', $appointment);
+=======
+      //  $this->authorize('delete', $appointment);
+>>>>>>> dev
         $appointment->delete();
         return back()->with('success', 'Appointment cancelled.');
     }
