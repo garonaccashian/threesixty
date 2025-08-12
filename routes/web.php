@@ -16,5 +16,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', function() {
+        return view('admin.dashboard');
+    });
+});
+
 
 require __DIR__.'/auth.php';
