@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Coach;
 
 class AppointmentController extends Controller
 {
@@ -13,6 +14,8 @@ class AppointmentController extends Controller
     }
 
     public function create() {
+        $coaches = Coach::all();
+    return view('appointments.create', compact('coaches'));
         return view('appointments.create');
     }
 
@@ -20,6 +23,7 @@ class AppointmentController extends Controller
         $request->validate(['appointment_time' => 'required|date|after:now']);
         Appointment::create([
             'user_id' => Auth::id(),
+            'coach_id' => $request->coach_id,
             'appointment_time' => $request->appointment_time,
             'status' => 'pending',
         ]);
